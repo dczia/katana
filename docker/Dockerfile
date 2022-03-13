@@ -1,5 +1,5 @@
 # Dockerfile to spin up a working Katana installation
-FROM python:3.9.5
+FROM python:3.10
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -39,9 +39,10 @@ RUN make
 RUN cp /usr/snow-20130616/snow /usr/local/bin/snow && chmod +x /usr/local/bin/snow
 
 # Clone Katana Repository
-RUN git clone --recursive https://github.com/JohnHammond/katana.git /katana
+RUN git clone --recursive https://github.com/dczia/katana.git /katana
 # Install katana python dependencies
 WORKDIR /katana
+RUN git checkout fixed-dockerfiles
 RUN pip install -r requirements.txt
 
 # Create runtime data directory directory
